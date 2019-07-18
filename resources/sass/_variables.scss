@@ -1,0 +1,46 @@
+// Responsive Web Design
+$screen-sm: 576px;
+$screen-md: 768px;
+$screen-lg: 992px;
+$screen-xl: 1200px;
+$screen-xxl: 1500px;
+
+@mixin min-sm{
+	@media (min-width: #{$screen-sm}){
+		@content;
+	}
+}
+
+@mixin min-md{
+	@media (min-width: #{$screen-md}){
+		@content;
+	}
+}
+
+@mixin min-lg{
+	@media (min-width: #{$screen-lg}){
+		@content;
+	}
+}
+
+@mixin min-xl{
+	@media (min-width: #{$screen-xl}){
+		@content;
+	}
+}
+
+@mixin min-xxl{
+	@media (min-width: #{$screen-xxl}){
+		@content;
+	}
+}
+
+@mixin max-xl{
+	@media (max-width: #{$screen-xl}){
+		@content;
+	}
+}
+
+
+// Colors
+$mainColor: #0E4C97;

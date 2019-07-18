@@ -1,0 +1,9 @@
+$('.navbar-toggler').click(function(){
+	if($(this).find('i').hasClass('fa-bars')){
+		$(this).find('i').removeClass('fa-bars');
+		$(this).find('i').addClass('fa-times');
+	}else{
+		$(this).find('i').removeClass('fa-times');
+		$(this).find('i').addClass('fa-bars');
+	}
+});

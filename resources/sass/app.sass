@@ -1,0 +1,237 @@
+// Fonts
+@import 'https://fonts.googleapis.com/css?family=Nunito)' 
+
+// Variables
+@import 'variables'
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap'
+
+// Font Awesome
+@import '~@fortawesome/fontawesome-free/scss/fontawesome.scss'
+@import '~@fortawesome/fontawesome-free/scss/regular.scss'
+@import '~@fortawesome/fontawesome-free/scss/solid.scss'
+@import '~@fortawesome/fontawesome-free/scss/brands.scss'
+
+
+//common
+
+body
+	font-family: Arial, Helvetica, sans-serif !important
+
+a
+	color: $mainColor
+	font-weight: bold
+	font-size: 1.15em
+	&:hover
+		text-decoration: none
+		color: $mainColor
+
+.photo
+	border-radius: 15px
+
+.form
+	border-radius: 20px
+	border: 4px solid $mainColor
+	box-shadow: 0px 0px 15px 1px $mainColor
+
+.form-header
+	background-color: $mainColor
+	border-radius: 15px 15px 0 0
+	padding: 1.5em 0
+
+.form-body
+	background-color: #FFFFFF
+	padding: 1.5em 2.75em 1.5em 2.75em
+	border-radius: 0 0 15px 15px
+
+label
+	font-size: 1.5em
+	font-weight: bold
+
+.btn-main
+	color: #FFFFFF
+	background-color: $mainColor
+	border: 3px solid #FFFFFF
+	font-weight: bold
+	font-size: 1.15em
+	&:hover
+		color: $mainColor
+		background-color: #FFFFFF
+		border: 3px solid $mainColor
+
+input
+	text-align: center
+
+.error-input
+	border-color: $red
+	color: $red
+
+.alert
+	display: none
+
+.title, .modal-title, .modal-title-main
+	font-weight: bold
+	text-align: center
+
+.btn-link:hover
+	text-decoration: none !important
+
+.color-white
+	color: #FFFFFF
+
+.color-main
+	color: $mainColor
+
+.background-main
+	background-color: $mainColor
+
+.form-check-input
+	width: 20px
+	height: 20px
+
+.fake-file
+	position: relative
+	overflow: hidden
+	display: inline-block
+	cursor: pointer
+	& input[type=file]
+		font-size: 100px
+		position: absolute
+		left: 0
+		top: 0
+		opacity: 0
+		cursor: pointer
+
+.modal-header
+	margin-left: 0 !important
+	margin-right: 0 !important
+	& .close
+		font-size: 3em !important
+
+
+//navigation-bar
+
+nav
+	background: $mainColor
+
+.navbar-toggler
+	font-size: 2.5em
+	color: #FFFFFF !important
+	font-weight: bold
+	border: 2px solid #FFFFFF !important
+
+.navbar-nav
+	@include max-xl
+		font-size: 1.5em
+		width: 100%
+
+.header-btn
+	color: #FFFFFF
+	font-weight: bold
+	background: transparent
+	border: none
+	outline: none
+	cursor: pointer
+	line-height: 4
+	position: relative
+	&:before
+		content: ""
+		display: block
+		width: 0
+		height: 5px
+		background: #FFFFFF
+		position: absolute
+		bottom: -5px
+		transition: all .3s
+		left: 50%
+		border-radius: 15px
+	&:hover:before
+		width: 100%
+		left: 0
+
+	@include min-xl
+		font-size: 1.1em
+
+	@include min-xxl
+		font-size: 1.4em
+
+// footer
+
+footer
+	background-color: $mainColor
+
+.social-btn
+	border-radius: 50%
+	width: 65px
+	height: 65px
+	cursor: pointer
+	i
+		color: #FFFFFF
+		font-size: 2.85em
+		text-decoration: none
+	
+#facebook-btn:hover
+	background-color: #4267b2
+
+#instagram-btn:hover
+	background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%,#d6249f 60%,#285AEB 90%)
+
+#twitter-btn:hover
+	background-color: #1DA1F2
+
+#gmail-btn:hover
+	background-color: #D93025
+
+// about
+
+.member .name
+	font-size: 1.5em
+
+.member .position
+	font-size: 1.25em
+
+//events
+
+.event
+	background-color: #EEEEEE
+	border-radius: 10px
+	border: 5px outset $mainColor
+	& .description
+		text-overflow: ellipsis
+		overflow: hidden
+		height: auto
+	& .more
+		background: transparent
+		border: none
+		&:hover
+			text-decoration: underline
+		&:focus
+			outline: 0
+	& .more span
+		color: $mainColor
+		font-weight: bold
+		cursor: pointer
+
+//chapters
+
+.chapter, .program
+	border-radius: 15px
+	transition: all .35s
+	&:hover
+		transform: scale(1.05)
+
+//memberships
+
+.membership-btn
+	background-color: $mainColor
+	color: #FFFFFF
+	font-size: 1.5em
+	border-radius: 15px
+	cursor: pointer
+
+//maps
+.map
+	border-radius: 25px
+	border: 5px $mainColor solid
+	height: 500px

@@ -1,0 +1,62 @@
+nav {
+  background: #0E4C97;
+}
+
+.navbar-toggler {
+  font-size: 2.5em;
+  color: #FFFFFF !important;
+  font-weight: bold;
+  border: 2px solid #FFFFFF !important;
+}
+
+@media (max-width: 1200px) {
+  .navbar-nav {
+    font-size: 1.5em;
+    width: 100%;
+  }
+}
+
+.header-btn {
+  color: #FFFFFF;
+  font-weight: bold;
+  background: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+@media (min-width: 1200px) {
+  .header-btn {
+    font-size: 1.1em;
+  }
+}
+
+@media (min-width: 1500px) {
+  .header-btn {
+    font-size: 1.4em;
+  }
+}
+
+.header-btn {
+  line-height: 4;
+  position: relative;
+}
+
+.header-btn:before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 5px;
+  background: #FFFFFF;
+  position: absolute;
+  bottom: -5px;
+  transition: all 0.3s;
+  left: 50%;
+  border-radius: 15px;
+}
+
+.header-btn:hover:before {
+  width: 100%;
+  left: 0;
+}
+

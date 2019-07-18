@@ -1,0 +1,31 @@
+.event {
+  background-color: #EEEEEE;
+  border-radius: 10px;
+  border: 5px outset #0E4C97;
+}
+
+.description {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  height: auto;
+}
+
+.more {
+  background: transparent;
+  border: none;
+}
+
+.more:hover {
+  text-decoration: underline;
+}
+
+.more:focus {
+  outline: 0;
+}
+
+.more span {
+  color: #0E4C97;
+  font-weight: bold;
+  cursor: pointer;
+}
+
