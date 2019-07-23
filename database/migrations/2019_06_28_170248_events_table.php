@@ -9,7 +9,7 @@ class EventsTable extends Migration
     public function up()
     {
         Schema::create('events', function (Blueprint $table) {
-            $table->mediumIncrements('id');
+            $table->smallIncrements('id');
             $table->string('title', 88);
             $table->text('description');
             $table->datetime('start_date');

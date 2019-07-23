@@ -3,11 +3,13 @@
 use App\Image;
 use App\Member;
 use App\Event;
+use App\Chapter;
 
 function saveImage($data){
 	$tables = [
 		'members' => new Member,
-		'events' => new Event
+		'events' => new Event,
+		'chapters' => new Chapter
 	];
 
 	$validation = Validator::make($data, [

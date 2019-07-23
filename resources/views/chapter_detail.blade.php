@@ -35,46 +35,36 @@
 				</div>
 				<div class="modal-footer">
 					<button class="btn btn-main mx-2" data-dismiss="modal">Cancelar</button>
-					<button class="btn btn-main mx-2" onclick="saveMemberData()">Terminar</button>
+					<button class="btn btn-main mx-2" onclick="saveMemberData({{$chapter->id}})">Terminar</button>
 				</div>
 			</div>
 		</div>
 	</div>	
 	@endif
 	<div class="row mx-0">
-		<section class="my-5 col-9">
+		<section class="my-5 col-9 pr-3">
 			<div class="row col-12 mx-0 d-flex justify-content-center">
-				<div class="col-10">
-					<div class="d-flex justify-content-center">
-						<img src="{{asset('/images/about_group.' . $images['about_group'])}}" alt="Junta Directiva SPE Northeast Colombia Section" class="img-fluid photo">					
+				<div class="col-10 row">
+					<div class="mt-5 col-12">
+						<h1 class="text-center">
+							<strong>{{ $chapter->name }}</strong>
+						</h1>
 					</div>
-					@if(Auth::user())
-					<div class="row my-2 d-flex justify-content-center">
-						<div class="fake-file" id="edit-about_group">
-							<button class="btn btn-main"><i class="fas fa-pencil-alt mr-2"></i>Editar</button>
-							<input type="file" accept="image/*" onchange="editPhoto('about_group', 'main')">
-						</div>
-					</div>						
-					@endif					
-					<div class="mt-4">
-						<h2 class="text-center"><strong>Quienes somos</strong></h2>
-						<br>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum eveniet voluptatum quas odit expedita saepe, sunt libero quaerat, rem iste perferendis voluptas est corrupti. Animi delectus dolore, dicta tenetur ipsam?</p>
-						<br>
-						<h2 class="text-center"><strong>Misión</strong></h2>
-						<br>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum eveniet voluptatum quas odit expedita saepe, sunt libero quaerat, rem iste perferendis voluptas est corrupti. Animi delectus dolore, dicta tenetur ipsam?</p>
-						<br>
-						<h2 class="text-center"><strong>Visión</strong></h2>
-						<br>
-						<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum eveniet voluptatum quas odit expedita saepe, sunt libero quaerat, rem iste perferendis voluptas est corrupti. Animi delectus dolore, dicta tenetur ipsam?</p>
-						<br>						
+					<div class="my-4 col-12">
+						<div class="col-6 offset-3">
+							<img src="{{ asset('/images/chapters/' . $chapter->id . '.' . $chapter->extension )}}" class="img-fluid photo">
+						</div>						
 					</div>
-					<div class="mt-3">
-						<h2 class="text-center"><strong>Nuestra Junta Directiva</strong></h2>
-						<br>
-						<div class="row d-flex justify-content-center">
-							@foreach ($members as $member)
+					<div class="my-4">
+						{!! $chapter->description !!}
+					</div>
+					<div class="col-12 my-3 px-0">
+						<h3 class="text-center">
+							<strong>Junta Directiva</strong>
+						</h3>
+					</div>
+					<div class="col-12 row my-5">
+						@foreach ($members as $member)
 							<div class="col-4 p-3 member" id="member-{{ $member->id }}">
 								<img src="{{asset('/images/members/' . $member->id . '.' . $member->extension)}}" class="img-fluid photo">
 								<div class="row d-flex justify-content-center my-2">
@@ -90,14 +80,13 @@
 								</div>
 								@endif
 							</div>
-							@endforeach
-							@if(Auth::user())
+						@endforeach
+						@if(Auth::user())
 							<div class="col-12 d-flex justify-content-center mt-5">
 								<button class="btn btn-main" data-toggle="modal" data-target="#modal-member" data-operation="add"><i class="fas fa-plus mr-2"></i>Añadir</button>
 							</div>
-							@endif
-						</div>						
-					</div>
+						@endif
+					</div>	
 				</div>
 			</div>
 		</section>

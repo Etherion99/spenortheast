@@ -24,8 +24,8 @@
 				</div>
 			</div>
 		</section>
-		<aside class="my-5 col-3 pl-3">
-			aside
+		<aside class="my-5 col-3">
+			@include('layouts.aside', compact('indicators'))
 		</aside>
 	</div>	
 @endsection

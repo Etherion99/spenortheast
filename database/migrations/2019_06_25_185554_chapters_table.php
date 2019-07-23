@@ -11,6 +11,7 @@ class ChaptersTable extends Migration
         Schema::create('chapters', function (Blueprint $table) {
             $table->smallIncrements('id');
             $table->string('name', 58);
+            $table->text('description');
             $table->enum('extension', ['jpg', 'jpeg', 'png']);
             $table->timestamps();
         });

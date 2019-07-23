@@ -11,6 +11,11 @@ class Member extends Model
     protected $fillable = [
         'name',
         'position',
+        'chapter',
         'extension'
     ];
+
+    public function chapter(){
+    	return $this->belongsTo('App\Chapter');
+    }
 }

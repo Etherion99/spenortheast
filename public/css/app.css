@@ -16605,6 +16605,7 @@ input {
 .modal-header {
   margin-left: 0 !important;
   margin-right: 0 !important;
+  padding: 0 !important;
 }
 
 .modal-header .close {
@@ -16701,6 +16702,20 @@ footer {
 
 #gmail-btn:hover {
   background-color: #D93025;
+}
+
+.aside-description {
+  color: #0E4C97;
+  font-weight: bold;
+  text-align: center;
+}
+
+.indicator {
+  background-color: #0E4C97;
+  color: #FFFFFF;
+  border: 15px double #FFFFFF;
+  border-radius: 15px;
+  box-shadow: 0px 0px 5px 0px #000000;
 }
 
 .member .name {

@@ -39,7 +39,7 @@
 				</li>
 				<li class="nav-item">
 					<div class="mx-4 text-center">
-						<a href="\capitulos_estudiantiles">
+						<a href="\capitulos">
 							<span class="px-2 header-btn">Capítulos Estudiantiles</span></button>	
 						</a>
 					</div>

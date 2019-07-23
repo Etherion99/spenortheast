@@ -2,5 +2,6 @@
     "/js/access.js": "/js/access.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
+    "/js/chapters.js": "/js/chapters.js",
     "/js/events.js": "/js/events.js"
 }

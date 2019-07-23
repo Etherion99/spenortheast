@@ -147,7 +147,7 @@ $('#modal-member').on('hidden.bs.modal', function (){
 	$(this).find('.position').val('');
 });
 
-window.saveMemberData = function(){
+window.saveMemberData = function(chapter=null){
 	var fields = [
 		{
 			'name': 'edit-member-name',
@@ -163,7 +163,7 @@ window.saveMemberData = function(){
 		switch(operation){
 			case 'add':
 				if($('#modal-member input[type=file]')[0].files.length != 0){
-					addMember();	
+					addMember(chapter);	
 				}else{
 					alert('Recuerda seleccionar una foto');
 				}						
@@ -175,13 +175,14 @@ window.saveMemberData = function(){
 	}
 }
 
-window.addMember = function(){
+window.addMember = function(chapter){
 	var formData = new FormData();
 	formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 	formData.append('image_type', 'members');
 	formData.append('image', $('#modal-member').find('input[type=file]')[0].files[0]);
 	formData.append('name', $('#modal-member').find('.name').val());
 	formData.append('position', $('#modal-member').find('.position').val());
+	formData.append('chapter', chapter);
 
 	$.ajax({
 		url: '/member/create',
@@ -393,6 +394,150 @@ window.removeEvent = function(id){
 
 	$.ajax({
 		url: '/event/remove',
+		type: 'POST',
+		processData: false,
+		contentType: false,
+		dataType : 'json',
+		data: formData
+	}).done(function(result){
+		console.log(result);
+		window.location.reload();
+	}).fail(function(result){
+		console.log(result);
+		alert("Ha ocurrido un error al borrar la información");	
+	});
+}
+
+//students_chapters
+
+$('#modal-chapter').on('show.bs.modal', function (event){
+	operation = $(event.relatedTarget).data('operation');
+
+	switch(operation){
+		case 'add':
+			$(this).find('.modal-title-main').text('Añadir');
+			break;
+		case 'edit':
+			editing = $(event.relatedTarget).data('id');
+
+			$(this).find('.modal-title-main').text('Editar');
+
+			console.log($('#chapter-' + editing).find('.end_date').text());
+
+			$(this).find('.name').val($('#chapter-' + editing).find('.name').text());			
+
+			$(this).find('.description').summernote('code', 'Obteniendo descripción...');
+
+			var summernote = $(this).find('.description');
+
+			$.ajax({
+				url: '/chapter/description/' + editing,
+				type: 'GET',
+				dataType : 'json',
+			}).done(function(result){
+				console.log(result);
+				summernote.summernote('code', result['description']);
+			}).fail(function(result){
+				console.log(result);
+				summernote.summernote('code', 'Ha ocurrido un error al obtener la descripción');	
+			});
+			break;
+	}
+});
+
+$('#modal-chapter').on('hidden.bs.modal', function (){
+	$(this).find('input[type=file]').val('');
+	$(this).find('input[type=file]').prop("disabled", false);
+	$(this).find('.fake-file button').html("<i class='fas fa-camera mr-2'></i>Subir Imagen");
+
+	$(this).find('.title').val('');
+	$(this).find('.description').summernote('code', '');
+});
+
+window.saveChapterData = function(){
+	var fields = [
+		{
+			'name': 'edit-chapter-title',
+			'type': 'text'
+		},
+		{
+			'name': 'edit-chapter-description',
+			'type': 'text'
+		}
+	]
+
+	if(validateFields(fields)){
+		switch(operation){
+			case 'add':
+				if($('#modal-chapter .fake-file input[type=file]')[0].files.length != 0){
+					addChapter();	
+				}else{
+					alert('Recuerda seleccionar una foto');
+				}						
+				break;
+			case 'edit':
+				editChapter();
+				break;
+		}
+	}
+}
+
+window.addChapter = function(){
+	var formData = new FormData();
+	formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+	formData.append('image_type', 'chapters');
+	formData.append('image', $('#modal-chapter').find('.fake-file input[type=file]')[0].files[0]);
+	formData.append('name', $('#modal-chapter').find('.name').val());
+	formData.append('description', $('#modal-chapter').find('.description').summernote('code'));
+
+	$.ajax({
+		url: '/chapter/create',
+		type: 'POST',
+		processData: false,
+		contentType: false,
+		dataType : 'json',
+		data: formData
+	}).done(function(result){
+		console.log(result);
+		window.location.reload();
+	}).fail(function(result){
+		console.log(result);
+		alert("Ha ocurrido un error al guardar la información");	
+	});
+}
+
+window.editChapter = function(){
+	var formData = new FormData();
+	formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+	formData.append('id', editing);
+	formData.append('image_type', 'chapters');
+	formData.append('image', $('#modal-chapter').find('.fake-file input[type=file]')[0].files[0]);
+	formData.append('name', $('#modal-chapter').find('.name').val());
+	formData.append('description', $('#modal-chapter').find('.description').summernote('code'));
+
+	$.ajax({
+		url: '/chapter/edit',
+		type: 'POST',
+		processData: false,
+		contentType: false,
+		dataType : 'json',
+		data: formData
+	}).done(function(result){
+		console.log(result);
+		window.location.reload();
+	}).fail(function(result){
+		console.log(result);
+		alert("Ha ocurrido un error al guardar la información");	
+	});
+}
+
+window.removeChapter = function(id){
+	var formData = new FormData();
+	formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+	formData.append('id', id);
+
+	$.ajax({
+		url: '/chapter/remove',
 		type: 'POST',
 		processData: false,
 		contentType: false,

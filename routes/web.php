@@ -26,14 +26,12 @@ Route::get('/acceso', function () {
 });
 
 Route::get('/nosotros', 'RoutingController@about');
-Route::get('/eventos', 'RoutingController@events');
-Route::get('/programas', 'RoutingController@programs');
-Route::get('/capitulos_estudiantiles/{id?}', ['uses' => 'RoutingController@students_chapters']);
+Route::get('/eventos/{id?}', 'RoutingController@events');
+Route::get('/programas/{id?}', 'RoutingController@programs');
+Route::get('/capitulos/{id?}', 'RoutingController@chapters');
 Route::get('/membresias', 'RoutingController@memberships');
+Route::get('/contacto', 'RoutingController@contact');
 
-Route::get('/contacto', function () {
-    return view('contact');
-});
 
 Route::post('/images_upload', 'ImagesController@upload');
 
@@ -45,9 +43,19 @@ Route::post('/event/create', 'EventsController@create');
 Route::post('/event/edit', 'EventsController@edit');
 Route::post('/event/remove', 'EventsController@remove');
 
-Route::get('/evento/{id}', 'EventsController@index');
 Route::get('/event/description/{id}', ['uses' => 'EventsController@description']);
+
+Route::post('/chapter/create', 'ChaptersController@create');
+Route::post('/chapter/edit', 'ChaptersController@edit');
+Route::post('/chapter/remove', 'ChapterssController@remove');
+
+Route::get('/chapter/description/{id}', ['uses' => 'ChaptersController@description']);
 
 Route::post('/message/send', 'MessagesController@send');
 
 Auth::routes(['register' => false]);
+
+
+
+Route::get('/IG', ['uses' => 'APIController@getIGFeed']);
+

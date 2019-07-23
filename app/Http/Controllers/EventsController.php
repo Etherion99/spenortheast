@@ -9,12 +9,6 @@ use Carbon\Carbon;
 
 class EventsController extends Controller
 {
-    function index($id){
-        $event = Event::where('id', $id)->first();
-
-        return view('event_detail', $event);
-    }
-
     function create(Request $request){
         $newEvent = Event::create([
             'title' => $request->input('title'),

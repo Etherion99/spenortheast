@@ -1,14 +1,14 @@
 @extends('layouts.template')
 
 @section('styles')
-	<link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css">
 @endsection
 
 @section('scripts')
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js" defer></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-bs4.js" defer></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js" defer></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js" defer></script>
 	<script src="{{ asset('js/events.js') }}" defer></script>
 	<!--<script>
 		var map;
@@ -100,14 +100,14 @@
 							@foreach ($soonEvents as $event)
 							<div class="event row col-10 offset-1 mt-5 p-3" id="event-{{ $event->id }}">
 								<div class="col-4 pr-4">
-									<a href="/evento/{{ $event->id }}">
+									<a href="/eventos/{{ $event->id }}">
 										<img src="{{ asset('/images/events/' . $event->id . '.' . $event->extension )}}" class="img-fluid photo">		
 									</a>
 								</div>
 								<div class="col-8 pl-4 h-25">
 									<div class="row">
 										<div class="col-8 pl-0 d-flex align-items-center">
-											<a href="/evento/{{ $event->id }}">
+											<a href="/eventos/{{ $event->id }}">
 												<strong class="title">{{ $event->title }}</strong>
 											</a>								
 										</div>
@@ -133,7 +133,7 @@
 										<p>
 											<span class="description_preview">{!! $event->description_preview !!}...</span>
 											<button class="more">
-												<a href="/evento/{{ $event->id }}">
+												<a href="/eventos/{{ $event->id }}">
 													<span>Ver más</span>
 												</a>
 											</button>
@@ -153,14 +153,14 @@
 							@foreach ($recentEvents as $event)
 							<div class="event row col-10 offset-1 mt-5 p-3" id="event-{{ $event->id }}">
 								<div class="col-4 pr-4">
-									<a href="/evento/{{ $event->id }}">
+									<a href="/eventos/{{ $event->id }}">
 										<img src="{{ asset('/images/events/' . $event->id . '.' . $event->extension )}}" class="img-fluid photo">		
 									</a>
 								</div>
 								<div class="col-8 pl-4 h-25">
 									<div class="row">
 										<div class="col-8 pl-0 d-flex align-items-center">
-											<a href="/evento/{{ $event->id }}">
+											<a href="/eventos/{{ $event->id }}">
 												<strong class="title">{{ $event->title }}</strong>
 											</a>								
 										</div>
@@ -186,7 +186,7 @@
 										<p>
 											<span class="description_preview">{!! $event->description_preview !!}...</span>
 											<button class="more">
-												<a href="/evento/{{ $event->id }}">
+												<a href="/eventos/{{ $event->id }}">
 													<span>Ver más</span>
 												</a>
 											</button>
@@ -216,8 +216,8 @@
 				@endif
 			</div>
 		</section>
-		<aside class="my-5 col-3 pl-3">
-			aside
+		<aside class="my-5 col-3">
+			@include('layouts.aside', compact('indicators'))
 		</aside>
 	</div>
 @endsection

@@ -13,7 +13,10 @@ class MembersTable extends Migration
             $table->string('name', 38);
             $table->string('position', 28);
             $table->enum('extension', ['jpg', 'jpeg', 'png']);
+            $table->smallInteger('chapter')->unsigned()->nullable();
             $table->timestamps();
+
+            $table->foreign('chapter')->references('id')->on('chapters')->onUpdate('cascade');
         });
     }
 
