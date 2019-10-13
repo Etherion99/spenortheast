@@ -3,5 +3,6 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/js/chapters.js": "/js/chapters.js",
-    "/js/events.js": "/js/events.js"
+    "/js/events.js": "/js/events.js",
+    "/js/programs.js": "/js/programs.js"
 }

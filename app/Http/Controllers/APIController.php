@@ -17,15 +17,18 @@ class APIController extends Controller
     	$indicators = [
     		[
     			'name' => 'Brent',
-    			'url' => 'https://es.investing.com/commodities/brent-oil'
+    			'url' => 'https://es.investing.com/commodities/brent-oil',
+                'prefix' => 'USD $'
     		],
     		[
     			'name' => 'WTI',
-    			'url' => 'https://es.investing.com/commodities/crude-oil'
+    			'url' => 'https://es.investing.com/commodities/crude-oil',
+                'prefix' => 'USD $'
     		],
     		[
-    			'name' => 'TRM',
-    			'url' => 'https://es.investing.com/currencies/usd-cop'
+    			'name' => 'Dólar TRM',
+    			'url' => 'https://es.investing.com/currencies/usd-cop',
+                'prefix' => 'COP $'
     		]
     	];
 
@@ -37,6 +40,8 @@ class APIController extends Controller
 	        $value = floatval(str_replace(",",".",$value));
 
 	        $type = IndicatorType::select('id')->where('name', $indicator['name'])->first();
+
+            $value = $indicator['prefix'].$value;
 
 	        Indicator::create([
 	        	'value' => $value,
@@ -59,15 +64,18 @@ class APIController extends Controller
     }
 
     public function getIGFeed(){
-        // Create a new instagram instance.
         $instagram = new Instagram('11388896573.151c37b.c0490b15540b4c2daf3bea15e991cc34');
+        $media = $instagram->media(['count' => 5]);
 
-        /*// Fetch recent user media items.
-        $instagram->media();
+        $pubs = [];
+        
+        foreach ($media as $pub) {
+            array_push($pubs, [
+                'image' => $pub->images->standard_resolution->url,
+                'caption' => $pub->caption->text,
+            ]);
+        }
 
-        // Fetch user information.
-        $instagram->self();*/
-
-        return response()->json($instagram->media(['count' => 1]));
+        return response()->json($pubs);
     }
 }

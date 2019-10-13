@@ -10,7 +10,7 @@ class IndicatorsTable extends Migration
     {
         Schema::create('indicators', function (Blueprint $table) {
             $table->smallIncrements('id');
-            $table->double('value', 6, 2);
+            $table->string('value', 18);
             $table->tinyInteger('type')->unsigned();
             $table->timestamps();
 

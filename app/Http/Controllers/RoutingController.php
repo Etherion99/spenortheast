@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
 use App\Image;
 use App\Member;
@@ -15,6 +16,22 @@ use App\Indicator;
 
 class RoutingController extends Controller
 {
+    function home(){
+        $pubs = getIGFeed();
+        $soonEvents = Event::select('id', 'title', DB::raw('SUBSTRING(description, 1, 808) as description_preview'), 'start_date', 'end_date', 'extension')->where('end_date', '>=', Carbon::now())->orderBy('created_at', 'asc')->get();
+        $recentEvents = Event::select('id', 'title', DB::raw('SUBSTRING(description, 1, 808) as description_preview'), 'start_date', 'end_date', 'extension')->where('end_date', '<', Carbon::now())->limit(5 - count($soonEvents) < 0 ? 0 : 5 - count($soonEvents))->orderBy('created_at', 'asc')->get();
+        $gallery = Storage::disk('public')->files('images/gallery/');
+
+
+        return view('home', [
+            'pubs' => $pubs,
+            'recentEvents' => $recentEvents,
+            'soonEvents' => $soonEvents,
+            'gallery' => $gallery,
+            'indicators' => $this->getIndicators()
+        ]);
+    }
+
     function about(){
     	$images = $this->getImages(['about_group']);
     	$members = Member::select('id', 'name', 'position', 'extension')->whereNull('chapter')->get();
@@ -65,7 +82,13 @@ class RoutingController extends Controller
                 'indicators' => $this->getIndicators()
             ]);
         }else{
+            $program = Program::select('name', 'description', 'extension')->where('id', $id)->first();
+            $program['id'] = $id;
 
+            return view('program_detail', [
+                'program' => $program,
+                'indicators' => $this->getIndicators()
+            ]); 
         }        
     }
 
@@ -115,13 +138,13 @@ class RoutingController extends Controller
 	}
 
     function getIndicators(){
-        $indicators = ['Brent', 'WTI', 'TRM'];
+        $indicators = ['Brent', 'WTI', 'Dólar TRM'];
         $indicatorObjs = [];
 
         foreach($indicators as $indicator){
             $typeObj = IndicatorType::select('id')->where('name', $indicator)->first();
 
-            $indicatorObj = Indicator::select('value')->where('type', $typeObj->id)->whereDate('created_at', Carbon::today())->first();
+            $indicatorObj = Indicator::select('value')->where('type', $typeObj->id)->orderBy('created_at', 'desc')->first();
             $indicatorObj['name'] = $indicator;
 
             array_push($indicatorObjs, $indicatorObj);

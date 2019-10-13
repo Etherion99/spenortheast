@@ -552,6 +552,150 @@ window.removeChapter = function(id){
 	});
 }
 
+//programs
+
+$('#modal-program').on('show.bs.modal', function (event){
+	operation = $(event.relatedTarget).data('operation');
+
+	switch(operation){
+		case 'add':
+			$(this).find('.modal-title-main').text('Añadir');
+			break;
+		case 'edit':
+			editing = $(event.relatedTarget).data('id');
+
+			$(this).find('.modal-title-main').text('Editar');
+
+			$(this).find('.name').val($('#program-' + editing).find('.name').text());			
+
+			$(this).find('.description').summernote('code', 'Obteniendo descripción...');
+
+			var summernote = $(this).find('.description');
+
+			$.ajax({
+				url: '/program/description/' + editing,
+				type: 'GET',
+				dataType : 'json',
+			}).done(function(result){
+				console.log(result);
+				summernote.summernote('code', result['description']);
+			}).fail(function(result){
+				console.log(result);
+				summernote.summernote('code', 'Ha ocurrido un error al obtener la descripción');	
+			});
+			break;
+	}
+});
+
+$('#modal-program').on('hidden.bs.modal', function (){
+	$(this).find('input[type=file]').val('');
+	$(this).find('input[type=file]').prop("disabled", false);
+	$(this).find('.fake-file button').html("<i class='fas fa-camera mr-2'></i>Subir Imagen");
+
+	$(this).find('.title').val('');
+	$(this).find('.description').summernote('code', '');
+});
+
+window.saveProgramData = function(){
+	var fields = [
+		{
+			'name': 'edit-program-title',
+			'type': 'text'
+		},
+		{
+			'name': 'edit-program-description',
+			'type': 'text'
+		}
+	]
+
+	if(validateFields(fields)){
+		switch(operation){
+			case 'add':
+				if($('#modal-program .fake-file input[type=file]')[0].files.length != 0){
+					addProgram();	
+				}else{
+					alert('Recuerda seleccionar una foto');
+				}						
+				break;
+			case 'edit':
+				editProgram();
+				break;
+		}
+	}
+}
+
+window.addProgram = function(){
+	var formData = new FormData();
+	formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+	formData.append('image_type', 'programs');
+	formData.append('image', $('#modal-program').find('.fake-file input[type=file]')[0].files[0]);
+	formData.append('name', $('#modal-program').find('.name').val());
+	formData.append('description', $('#modal-program').find('.description').summernote('code'));
+
+	$.ajax({
+		url: '/program/create',
+		type: 'POST',
+		processData: false,
+		contentType: false,
+		dataType : 'json',
+		data: formData
+	}).done(function(result){
+		console.log(result);
+		window.location.reload();
+	}).fail(function(result){
+		console.log(result);
+		alert("Ha ocurrido un error al guardar la información");	
+	});
+}
+
+window.editProgram = function(){
+	var formData = new FormData();
+	formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+	formData.append('id', editing);
+	formData.append('image_type', 'programs');
+	formData.append('image', $('#modal-program').find('.fake-file input[type=file]')[0].files[0]);
+	formData.append('name', $('#modal-program').find('.name').val());
+	formData.append('description', $('#modal-program').find('.description').summernote('code'));
+
+	$.ajax({
+		url: '/program/edit',
+		type: 'POST',
+		processData: false,
+		contentType: false,
+		dataType : 'json',
+		data: formData
+	}).done(function(result){
+		console.log(result);
+		window.location.reload();
+	}).fail(function(result){
+		console.log(result);
+		alert("Ha ocurrido un error al guardar la información");	
+	});
+}
+
+window.removeProgram = function(id){
+	var formData = new FormData();
+	formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
+	formData.append('id', id);
+
+	$.ajax({
+		url: '/program/remove',
+		type: 'POST',
+		processData: false,
+		contentType: false,
+		dataType : 'json',
+		data: formData
+	}).done(function(result){
+		console.log(result);
+		window.location.reload();
+	}).fail(function(result){
+		console.log(result);
+		alert("Ha ocurrido un error al borrar la información");	
+	});
+}
+
+//contact
+
 window.sendMessage = function(){
 	var fields = [
 		{
@@ -567,6 +711,10 @@ window.sendMessage = function(){
 			'type': 'text'
 		},
 		{
+			'name': 'd-email',
+			'type': 'text'
+		},
+		{
 			'name': 'message_content',
 			'type': 'text'
 		}
@@ -577,8 +725,10 @@ window.sendMessage = function(){
 		formData.append('_token', $('meta[name="csrf-token"]').attr('content'));
 		formData.append('name', $('#name').val());
 		formData.append('email', $('#email').val());
+		formData.append('d-email', $('#d-email').val());
 		formData.append('subject', $('#subject').val());
 		formData.append('message_content', $('#message_content').val());
+		console.log(formData);
 
 		$.ajax({
 			url: '/message/send',

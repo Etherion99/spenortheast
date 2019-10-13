@@ -1,4 +1,5 @@
 <div class="col-10 offset-1">
+	@if(isset($indicators))
 	<div class="col-12">
 		<h1 class="text-center">
 			<b>Indicadores</b>
@@ -16,6 +17,7 @@
 			</div>
 		</div>
 	@endforeach
+	@endif
 	<div class="col-8 offset-2 my-5">
 		<div class="col-12 d-flex justify-content-center">
 			<a href="https://www.spe.org/events/calendar/">
@@ -66,4 +68,24 @@
 			<a href="https://www.spe.org/events/calendar/">Plataforma para conectar aprendices con mentores.</a>		
 		</div>
 	</div>
+	@if(isset($pubs))
+		<div class="col-12">
+			<h1 class="text-center">
+				<b>Nuestras Redes</b>
+			</h1>
+		</div>
+		@foreach($pubs as $pub)
+	    <div class="my-3">
+	        <div class="ig-pub">
+	            <div class="col-12 p-3 image d-flex justify-content-center">
+	                <img src="{{ $pub->image }}" class="img-fluid">
+	            </div>
+	            <hr class="ig-separator m-0">
+	            <div class="col-12 p-4 caption">
+	                <span>{!! $pub->caption !!}</span>
+	            </div>
+	        </div>                    
+	    </div>
+	    @endforeach
+	@endif	
 </div>

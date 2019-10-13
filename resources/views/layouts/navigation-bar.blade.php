@@ -1,12 +1,13 @@
 <header>
 	<nav class="navbar navbar-expand-xl navbar-dark">
-		<div class="col-xl-2 col-lg-3 col-md-4 col-sm-5 px-0 d-flex justify-content-center">
-			<div class="col-8">
+		<div class="col-xl-2 col-lg-3 col-md-4 col-sm-4 px-0 d-flex justify-content-center">
+			<div class="col-7">
 				<a href="/">
 					<img src="{{ asset('/images/logo.jpeg' )}}" alt="Logo SPE Northeast Colombia Section" class="img-fluid" id="logo">
 				</a>
 			</div>
 		</div>
+		
 		<div class="collapse navbar-collapse col-xl-10 col-lg-8 col-md-7 col-sm-6 px-0 row" id="navbarSupportedContent">
 			<ul class="navbar-nav mx-auto">
 				<li class="nav-item">
@@ -53,10 +54,10 @@
 				</li>
 			</ul>
 		</div>
-		<div class="col-1">
+		<div class="col-sm-2 col-xs-2">
 			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 				<i class="fas fa-bars"></i>
 			</button>
-		</div>						
+		</div>					
 	</nav>
 </header>

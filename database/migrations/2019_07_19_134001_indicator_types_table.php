@@ -10,7 +10,7 @@ class IndicatorTypesTable extends Migration
     {
         Schema::create('indicator_types', function (Blueprint $table) {
             $table->tinyIncrements('id');
-            $table->string('name', 8);
+            $table->string('name', 10);
         });
     }
 

@@ -13,8 +13,8 @@ class MessagesController extends Controller
     	$data = $request->all();
  
         Mail::send('mails.standard', $data, function($message) use($data) {
-            $message->from($data['email'])
-            	->to('juanstt99@gmail.com')
+            $message->from('chairperson@spenortheastco.org')
+            	->to($data['d-email'])
                 ->subject($data['subject']);
         });
     	

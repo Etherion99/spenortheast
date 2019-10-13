@@ -15,4 +15,5 @@ mix.js('resources/js/app.js', 'public/js')
 	.js('resources/js/access.js', 'public/js')
 	.js('resources/js/events.js', 'public/js')
 	.js('resources/js/chapters.js', 'public/js')
+	.js('resources/js/programs.js', 'public/js')
     .sass('resources/sass/app.sass', 'public/css');
